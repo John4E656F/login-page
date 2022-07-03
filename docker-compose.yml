@@ -1,50 +1,47 @@
-version: '3'
+version: '3.1'
 
 services:
-  ## PHP-Apache service
   server:
-    build:
+    build: 
       context: ./application
     container_name: login-webserver
+    restart: always
     ports:
       - 80:80
-    restart: always
     volumes:
       - ./application/source:/var/www/html
     env_file:
       - ./docker.env
     networks:
-      - becode-login
+      - login
 
-  ## Mariadb service 
   database:
-    image: mariadb:10.4.2
+    image: mariadb:latest
     container_name: login-database
     restart: always
     volumes:
       - ./database:/docker-entrypoint-initdb.d/
-      - becode_data:/var/lib/mysql
+      - login_data:/var/lib/mysql
     env_file:
       - ./docker.env
     networks:
-      - becode-login
+      - login
 
-  ## PhpMyAdmin
-  myadmin:
-    image: phpmyadmin/phpmyadmin:4.8.1
+  phpmyadmin:
+    image: phpmyadmin:latest
     container_name: login-phpmyadmin
-    ports:
-      - 8082:80
     restart: always
+    ports:
+      - 8081:80
     env_file:
       - ./docker.env
     depends_on:
       - database
     networks:
-      - becode-login
+      - login
 
 networks:
-  becode-login:
+  login:
 
 volumes:
-  becode_data:
+  login_data:

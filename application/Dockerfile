@@ -1,5 +1,6 @@
 FROM php:7.3-apache
 
+
 ## Copy source code
 COPY ./source /var/www/html
 
@@ -13,4 +14,4 @@ RUN curl --silent --show-error https://getcomposer.org/installer | \
 
 ## Enable PHP and Apache modules
 RUN docker-php-ext-install pdo pdo_mysql mysqli gettext
-RUN a2enmod rewrite headers ssl
+RUN a2enmod rewrite headers ssls
