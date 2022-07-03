@@ -13,7 +13,7 @@
                     if($row['username'] == $username & $row['password'] == $password){
                         exit(header("Location: ../index.php?signup=successlogin"));
                     } else {
-                        echo 'Wrong pemail or password';
+                        echo 'Wrong email or password';
                     }
 
                 }

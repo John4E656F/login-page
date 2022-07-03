@@ -38,7 +38,7 @@
             <input type="submit" name="register" value="Register">
         </form>
 
-        <form method="POST" action="includes/login.php">
+        <!-- <form method="POST" action="includes/login.php">
             <label for="username">Username
                 <input type="text" placeholder="Your Username" name="username" >
             </label>
@@ -48,6 +48,6 @@
             </label>
                 <br>
             <input type="submit" name="login" value="Login">
-        </form>
+        </form> -->
     </body>
 </html>

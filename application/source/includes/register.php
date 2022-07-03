@@ -10,9 +10,9 @@
         $lastname = $_POST['lastname'];
 
         require_once 'dbh.php';
-        require_once 'function.php'
+        require_once 'function.php';
 
-        if(emtyInputSignup($username, $email, $password, $firstname, $lastname) !== false){
+        if(emptyInputSignup($username, $email, $password, $confirmPass, $firstname, $lastname) !== false){
             exit(header("Location: ../index.php?error=emptyinput"));
         }
         if(invalidUid($username) !== false){
@@ -24,9 +24,11 @@
         if(pwdMatch($password, $confirmPass) !== false){
             exit(header("Location: ../index.php?error=passworddontmatch"));
         }
-        if(uidExists($pdo, $username) !== false){
+        if(uidExists($pdo, $username, $email) !== false){
             exit(header("Location: ../index.php?error=usernametaken"));
         }
+
+        createUser($pdo, $username, $email, $password, $firstname, $lastname);
 
         $sql = "INSERT INTO student (username, email, password, first_name, last_name)
                 VALUES ('$username', '$email', '$password', '$firstname', '$lastname');";
@@ -34,4 +36,7 @@
 
             exit(header("Location: ../index.php?signup=success"));
     
+    } else {
+        echo 'error';
+
     }
